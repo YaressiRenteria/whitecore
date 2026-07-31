@@ -1,0 +1,12 @@
+:root{
+
+  --radius:20px;
+
+  --shadow:
+      0 10px 40px rgba(37,99,235,.15);
+
+  --transition:.3s ease;
+
+  --max-width:1280px;
+
+}

@@ -1,0 +1,14 @@
+:root{
+  --background:#050816;
+  --background-secondary:#111827;
+
+  --primary:#2563EB;
+  --primary-hover:#3B82F6;
+
+  --white:#FFFFFF;
+  --gray:#D1D5DB;
+  --gray-dark:#6B7280;
+
+  --success:#10B981;
+  --danger:#EF4444;
+}
