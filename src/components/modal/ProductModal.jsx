@@ -178,15 +178,10 @@ function ProductModal({ product, open, onClose }) {
                   onClick={() => {
                     const message = encodeURIComponent(
 `Hola WhiteCore 👋
-
 Me interesa comprar el siguiente producto:
-
-📦 Producto: ${selectedProduct.name}
-
-🔢 Cantidad: ${quantity}
-
-💲 Total: $${total}
-
+Producto: ${selectedProduct.name}
+Cantidad: ${quantity}
+Total: $${total}
 ¿Está disponible?
 Me gustaría recibir información sobre la entrega.`
                     );
