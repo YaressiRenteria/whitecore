@@ -1,6 +1,20 @@
 function ProductButtons({ product, onOpen }) {
+  const phone = "528129301783";
+
+  const message = encodeURIComponent(
+    `Hola WhiteCore 👋
+
+Me interesa comprar:
+
+📦 ${product.name}
+
+💲 Precio: $${product.price}
+
+¿Podrían darme más información?`
+  );
+
   return (
-    <div className="mt-8 flex flex-col gap-4">
+    <div className="mt-8 flex flex-col gap-3">
 
       <button
         onClick={onOpen}
@@ -12,7 +26,7 @@ function ProductButtons({ product, onOpen }) {
           text-blue-400
           hover:bg-blue-600
           hover:text-white
-          py-4
+          py-3
           font-bold
           transition-all
           duration-300
@@ -22,19 +36,9 @@ function ProductButtons({ product, onOpen }) {
       </button>
 
       <a
-        href={`https://wa.me/528129301783?text=${encodeURIComponent(
-          `Hola WhiteCore 👋
-
-Me interesa comprar:
-
-📦 ${product.name}
-
-💲 Precio: $${product.price}
-
-¿Podrían darme más información?`
-        )}`}
+        href={`https://wa.me/${phone}?text=${message}`}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         className="
           w-full
           rounded-xl
