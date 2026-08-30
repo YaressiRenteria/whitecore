@@ -27,7 +27,17 @@ function ProductModal({ product, open, onClose }) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 bg-black/80 backdrop-blur-md flex justify-center items-center z-[999] p-6"
+          className="
+            fixed
+            inset-0
+            bg-black/80
+            backdrop-blur-md
+            flex
+            justify-center
+            items-center
+            z-[999]
+            p-6
+          "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -50,51 +60,156 @@ function ProductModal({ product, open, onClose }) {
             transition={{
               duration: 0.35,
             }}
-            className="relative bg-[#08111F] rounded-3xl border border-blue-900/30 overflow-hidden max-w-6xl w-full max-h-[92vh] overflow-y-auto shadow-2xl"
+            className="
+              relative
+              bg-[#08111F]
+              rounded-3xl
+              border
+              border-blue-900/30
+              overflow-hidden
+              max-w-6xl
+              w-full
+              max-h-[92vh]
+              overflow-y-auto
+              shadow-2xl
+            "
           >
+
+            {/* Botón cerrar */}
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 w-11 h-11 rounded-full bg-[#111827] hover:bg-blue-600 transition flex justify-center items-center z-50"
+              className="
+                absolute
+                top-6
+                right-6
+                w-11
+                h-11
+                rounded-full
+                bg-[#111827]
+                hover:bg-blue-600
+                transition
+                flex
+                justify-center
+                items-center
+                z-50
+              "
             >
               <X size={22} color="white" />
             </button>
 
             <div className="grid lg:grid-cols-2">
-              {/* Imagen */}
-              <div className="bg-[#111827] flex justify-center items-center p-12">
+
+              {/* ========================= */}
+              {/* IMAGEN DEL PRODUCTO */}
+              {/* ========================= */}
+
+              <div
+                className="
+                  relative
+                  w-full
+                  h-72
+                  sm:h-96
+                  lg:h-full
+                  min-h-[500px]
+                  overflow-hidden
+                  bg-[#08111F]
+                  flex
+                  items-center
+                  justify-center
+                  group
+                "
+              >
+
                 <motion.img
                   src={selectedProduct.image}
                   alt={selectedProduct.name}
+
                   whileHover={{
                     scale: 1.08,
                   }}
+
                   transition={{
                     duration: 0.3,
                   }}
-                  className="w-full max-w-lg object-contain"
+
+                  className="
+                    absolute
+                    inset-0
+                    w-full
+                    h-full
+                    object-cover
+                    select-none
+                  "
                 />
+
+                {/* Degradado */}
+                <div
+                  className="
+                    absolute
+                    inset-0
+                    bg-gradient-to-t
+                    from-[#08111F]/30
+                    via-transparent
+                    to-transparent
+                    pointer-events-none
+                  "
+                />
+
               </div>
 
-              {/* Información */}
+              {/* ========================= */}
+              {/* INFORMACIÓN */}
+              {/* ========================= */}
+
               <div className="p-10 flex flex-col">
+
                 <div className="flex gap-3 flex-wrap">
-                  <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+
+                  <span className="
+                    bg-blue-600
+                    text-white
+                    px-4
+                    py-2
+                    rounded-full
+                    text-sm
+                    font-semibold
+                  ">
                     {selectedProduct.category}
                   </span>
 
                   {selectedProduct.featured && (
-                    <span className="bg-yellow-400 text-black px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2">
+                    <span className="
+                      bg-yellow-400
+                      text-black
+                      px-4
+                      py-2
+                      rounded-full
+                      text-sm
+                      font-bold
+                      flex
+                      items-center
+                      gap-2
+                    ">
                       <Flame size={16} />
                       Más vendido
                     </span>
                   )}
+
                 </div>
 
-                <h2 className="text-white text-5xl font-black mt-6 leading-tight">
+                <h2 className="
+                  text-white
+                  text-5xl
+                  font-black
+                  mt-6
+                  leading-tight
+                ">
                   {selectedProduct.name}
                 </h2>
 
+                {/* Estrellas */}
                 <div className="flex items-center gap-1 mt-5">
+
                   <Star fill="#FFD700" color="#FFD700" size={20} />
                   <Star fill="#FFD700" color="#FFD700" size={20} />
                   <Star fill="#FFD700" color="#FFD700" size={20} />
@@ -104,73 +219,152 @@ function ProductModal({ product, open, onClose }) {
                   <span className="ml-3 text-gray-400">
                     OEM Premium
                   </span>
+
                 </div>
 
-                <h3 className="text-blue-400 text-5xl font-black mt-8">
+                {/* Precio */}
+                <h3 className="
+                  text-blue-400
+                  text-5xl
+                  font-black
+                  mt-8
+                ">
                   ${selectedProduct.price}
                 </h3>
 
-                <p className="text-gray-400 text-lg leading-8 mt-8">
+                {/* Descripción */}
+                <p className="
+                  text-gray-400
+                  text-lg
+                  leading-8
+                  mt-8
+                ">
                   {selectedProduct.description}
                 </p>
 
+                {/* Características */}
                 <div className="space-y-5 mt-10">
-                  <div className="flex items-center gap-3 text-white">
+
+                  <div className="
+                    flex
+                    items-center
+                    gap-3
+                    text-white
+                  ">
                     <ShieldCheck color="#3B82F6" />
                     Garantía de {selectedProduct.warranty}
                   </div>
 
-                  <div className="flex items-center gap-3 text-white">
+                  <div className="
+                    flex
+                    items-center
+                    gap-3
+                    text-white
+                  ">
                     <Truck color="#3B82F6" />
                     Entrega en Ciudad Universitaria UANL y Mitras Poniente
                   </div>
 
-                  <div className="flex items-center gap-3 text-white">
+                  <div className="
+                    flex
+                    items-center
+                    gap-3
+                    text-white
+                  ">
                     <MessageCircle color="#3B82F6" />
                     Atención rápida por WhatsApp
                   </div>
+
                 </div>
 
                 {/* Cantidad */}
                 <div className="mt-10">
+
                   <p className="text-gray-400 mb-4">
                     Cantidad
                   </p>
 
                   <div className="flex items-center gap-5">
+
                     <button
                       onClick={() =>
                         quantity > 1 && setQuantity(quantity - 1)
                       }
-                      className="w-12 h-12 rounded-xl bg-[#111827] hover:bg-blue-600 text-white text-2xl transition"
+                      className="
+                        w-12
+                        h-12
+                        rounded-xl
+                        bg-[#111827]
+                        hover:bg-blue-600
+                        text-white
+                        text-2xl
+                        transition
+                      "
                     >
                       -
                     </button>
 
-                    <span className="text-white text-3xl font-bold">
+                    <span className="
+                      text-white
+                      text-3xl
+                      font-bold
+                    ">
                       {quantity}
                     </span>
 
                     <button
                       onClick={() => setQuantity(quantity + 1)}
-                      className="w-12 h-12 rounded-xl bg-[#111827] hover:bg-blue-600 text-white text-2xl transition"
+                      className="
+                        w-12
+                        h-12
+                        rounded-xl
+                        bg-[#111827]
+                        hover:bg-blue-600
+                        text-white
+                        text-2xl
+                        transition
+                      "
                     >
                       +
                     </button>
+
                   </div>
+
                 </div>
 
                 {/* Total */}
-                <div className="mt-10 bg-[#111827] rounded-2xl p-6 border border-blue-900/30">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-400 text-lg">
+                <div className="
+                  mt-10
+                  bg-[#111827]
+                  rounded-2xl
+                  p-6
+                  border
+                  border-blue-900/30
+                ">
+
+                  <div className="
+                    flex
+                    justify-between
+                    items-center
+                  ">
+
+                    <span className="
+                      text-gray-400
+                      text-lg
+                    ">
                       Total
                     </span>
 
-                    <span className="text-white text-4xl font-black">
+                    <span className="
+                      text-white
+                      text-4xl
+                      font-black
+                    ">
                       ${total}
                     </span>
+
                   </div>
+
                 </div>
 
                 {/* Botón WhatsApp */}
@@ -215,7 +409,13 @@ Me gustaría recibir información sobre la entrega.`
 
                 {/* Productos relacionados */}
                 <div className="mt-12">
-                  <h3 className="text-white text-2xl font-bold mb-6">
+
+                  <h3 className="
+                    text-white
+                    text-2xl
+                    font-bold
+                    mb-6
+                  ">
                     Productos relacionados
                   </h3>
 
@@ -226,9 +426,13 @@ Me gustaría recibir información sobre la entrega.`
                       setQuantity(1);
                     }}
                   />
+
                 </div>
+
               </div>
+
             </div>
+
           </motion.div>
         </motion.div>
       )}
@@ -237,3 +441,4 @@ Me gustaría recibir información sobre la entrega.`
 }
 
 export default ProductModal;
+

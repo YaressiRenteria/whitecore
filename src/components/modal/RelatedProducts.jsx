@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import products from "../../data/products";
 
@@ -28,7 +27,6 @@ function RelatedProducts({
   ].slice(0, 3);
 
   return (
-
     <div className="mt-14">
 
       <h3 className="text-white text-2xl font-bold mb-6">
@@ -55,17 +53,35 @@ function RelatedProducts({
 
             className="
               cursor-pointer
-              bg-[#111827]
-              rounded-2xl
+              bg-[#08111F]
+              rounded-3xl
               overflow-hidden
               border
               border-blue-900/30
               hover:border-blue-500
-              transition
+              transition-all
+              duration-500
+              shadow-xl
+              hover:shadow-[0_25px_60px_rgba(59,130,246,.35)]
             "
           >
 
-            <div className="w-full h-36 bg-[#08111F] flex items-center justify-center overflow-hidden">
+            {/* Imagen del producto */}
+            <div
+              className="
+                relative
+                h-72
+                sm:h-80
+                lg:h-96
+                w-full
+                overflow-hidden
+                bg-[#08111F]
+                flex
+                items-center
+                justify-center
+                group
+              "
+            >
 
               <motion.img
                 src={item.image}
@@ -73,34 +89,70 @@ function RelatedProducts({
                 loading="lazy"
 
                 whileHover={{
-                  scale: 1.08,
+                  scale: 1.15,
                 }}
 
                 transition={{
-                  duration: 0.3,
+                  duration: 0.35,
                 }}
 
                 className="
+                  absolute
+                  inset-0
                   w-full
                   h-full
-                  object-contain
-                  p-3
+                  object-cover
+                  select-none
+                "
+              />
+
+              {/* Degradado */}
+              <div
+                className="
+                  absolute
+                  inset-0
+                  bg-gradient-to-t
+                  from-[#08111F]/30
+                  via-transparent
+                  to-transparent
+                  pointer-events-none
                 "
               />
 
             </div>
 
-            <div className="p-4">
+            {/* Información del producto */}
+            <div className="p-6">
 
-              <h4 className="text-white font-semibold min-h-[48px]">
+              <h4
+                className="
+                  text-white
+                  font-semibold
+                  text-lg
+                  min-h-[48px]
+                "
+              >
                 {item.name}
               </h4>
 
-              <p className="text-blue-400 font-bold mt-2">
+              <p
+                className="
+                  text-blue-400
+                  font-bold
+                  text-lg
+                  mt-2
+                "
+              >
                 ${item.price}
               </p>
 
-              <p className="text-gray-500 text-sm mt-2">
+              <p
+                className="
+                  text-gray-500
+                  text-sm
+                  mt-2
+                "
+              >
                 Ver producto →
               </p>
 
@@ -113,9 +165,8 @@ function RelatedProducts({
       </div>
 
     </div>
-
   );
-
 }
 
 export default RelatedProducts;
+
