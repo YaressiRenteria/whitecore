@@ -88,7 +88,7 @@ function Hero() {
           >
 
             <img
-              src="/products/hero-productos.jpg"
+              src="/products/hero-productos.jpeg"
               alt="Productos WhiteCore"
               className="
                 w-full

@@ -6,9 +6,10 @@ function ProductImage({ product, onOpen }) {
       onClick={onOpen}
       className="
         relative
-        h-64
-        sm:h-72
-        lg:h-80
+        h-72
+        sm:h-80
+        lg:h-96
+        w-full
         overflow-hidden
         cursor-pointer
         bg-[#08111F]
@@ -50,7 +51,7 @@ function ProductImage({ product, onOpen }) {
         alt={product.name}
         loading="lazy"
         whileHover={{
-          scale: 1.05,
+          scale: 1.15,
         }}
         transition={{
           duration: 0.35,
@@ -65,7 +66,7 @@ function ProductImage({ product, onOpen }) {
         "
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-[#08111F]/40 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#08111F]/30 via-transparent to-transparent pointer-events-none" />
     </div>
   );
 }
