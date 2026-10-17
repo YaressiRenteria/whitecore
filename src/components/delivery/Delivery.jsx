@@ -1,183 +1,23 @@
-import { motion } from "framer-motion";
-import { MapPin, Clock, Navigation } from "lucide-react";
-
-function DeliveryPoints() {
-
-  const locations = [
-
-    {
-      title: "Ciudad Universitaria UANL",
-      schedule: "Lunes a Viernes • 5:00 PM - 9:30 PM",
-      description:
-        "Entregas en las diferentes facultades de Ciudad Universitaria.",
-      image: "/images/cu-map.jpg",
-      link: "https://maps.google.com/",
-    },
-
-    {
-      title: "Mitras Poniente",
-      schedule: "Todos los días",
-      description:
-        "Punto de entrega en Mitras Poniente.",
-      image: "/images/mitras-map.jpg",
-      link: "https://maps.google.com/",
-    },
-
-  ];
-
-  return (
-
-    <section
-      id="entregas"
-      className="py-32 px-6 bg-[#08111F]"
-    >
-
-      <div className="max-w-7xl mx-auto">
-
-        <motion.h2
-
-          initial={{ opacity:0,y:30 }}
-
-          whileInView={{ opacity:1,y:0 }}
-
-          viewport={{ once:true }}
-
-          className="text-center text-5xl font-black text-white"
-
-        >
-
-          Puntos de
-
-          <span className="text-blue-500">
-
-            {" "}Entrega
-
-          </span>
-
-        </motion.h2>
-
-        <motion.p
-
-          initial={{ opacity:0 }}
-
-          whileInView={{ opacity:1 }}
-
-          transition={{ delay:.2 }}
-
-          viewport={{ once:true }}
-
-          className="text-center text-gray-400 text-xl mt-6 max-w-3xl mx-auto"
-
-        >
-
-          Escoge el punto de entrega que más te convenga.
-
-        </motion.p>
-
-        <div className="grid lg:grid-cols-2 gap-10 mt-20">
-
-          {locations.map((location,index)=>(
-
-            <motion.div
-
-              key={index}
-
-              initial={{ opacity:0,y:40 }}
-
-              whileInView={{ opacity:1,y:0 }}
-
-              viewport={{ once:true }}
-
-              transition={{ delay:index*.15 }}
-
-              whileHover={{
-                y:-8,
-              }}
-
-              className="bg-[#111827] rounded-3xl overflow-hidden border border-blue-900/30 hover:border-blue-500 shadow-xl"
-
-            >
-
-              <img
-
-                src={location.image}
-
-                alt={location.title}
-
-                className="w-full h-72 object-cover"
-
-              />
-
-              <div className="p-8">
-
-                <div className="flex items-center gap-3">
-
-                  <MapPin
-                    className="text-blue-500"
-                    size={24}
-                  />
-
-                  <h3 className="text-white text-3xl font-bold">
-
-                    {location.title}
-
-                  </h3>
-
-                </div>
-
-                <div className="flex items-center gap-3 mt-6">
-
-                  <Clock
-                    className="text-blue-400"
-                    size={20}
-                  />
-
-                  <p className="text-gray-300">
-
-                    {location.schedule}
-
-                  </p>
-
-                </div>
-
-                <p className="text-gray-400 leading-8 mt-6">
-
-                  {location.description}
-
-                </p>
-
-                <a
-
-                  href={location.link}
-
-                  target="_blank"
-
-                  rel="noreferrer"
-
-                  className="mt-8 inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-700 transition rounded-xl px-8 py-4 text-white font-bold"
-
-                >
-
-                  <Navigation size={20}/>
-
-                  Abrir en Google Maps
-
-                </a>
-
-              </div>
-
-            </motion.div>
-
-          ))}
-
-        </div>
-
-      </div>
-
-    </section>
-
-  );
-
-}
-
-export default DeliveryPoints;
+const deliveryPoints = [
+  {
+    id: 1,
+    name: "Ciudad Universitaria UANL",
+    schedule: "Lunes a Viernes • 5:00 PM - 9:30 PM",
+    description:
+      "Realizamos entregas en todas las facultades de Ciudad Universitaria UANL.",
+    embed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7188.702073613057!2d-100.311689!3d25.72590245!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8662945396f6d5fb%3A0x3c1bded18c161920!2sNi%C3%B1os%20H%C3%A9roes%2C%20Ciudad%20Universitaria%2C%20San%20Nicol%C3%A1s%20de%20los%20Garza%2C%20N.L.!5e0!3m2!1ses-419!2smx!4v1785357286645!5m2!1ses-419!2smx",
+    link: "https://maps.app.goo.gl/mLh9mufPyZD4J5iNA",
+  },
+  {
+    id: 2,
+    name: "Mitras Poniente",
+    schedule: "Todos los días",
+    description: "Entregamos en Mitras Poniente.",
+    embed:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14370.553884641638!2d-100.43066114999996!3d25.782502350000012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x866290a2591b5299%3A0xa0572f762f3b69b3!2sVillas%20del%20Poniente%2C%20Mitras%20Poniente%2C%2066023%20Villas%20del%20Poniente%2C%20N.L.!5e0!3m2!1ses-419!2smx!4v1785382608088!5m2!1ses-419!2smx",
+    link: "https://maps.app.goo.gl/KQstdhRT2qTnVjhq9",
+  },
+];
+
+export default deliveryPoints;

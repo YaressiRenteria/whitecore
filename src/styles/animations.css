@@ -1,0 +1,20 @@
+.spin{ animation:spin 30s linear infinite; }
+.float{ animation:float 7s ease-in-out infinite; }
+
+@keyframes spin{
+  to{ transform:rotate(360deg); }
+}
+
+@keyframes float{
+  50%{ transform:translateY(-12px); }
+}
+
+@keyframes shine{
+  0%{ transform:translateX(-250px) rotate(12deg); }
+  100%{ transform:translateX(650px) rotate(12deg); }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  .spin,.float{ animation:none; }
+}

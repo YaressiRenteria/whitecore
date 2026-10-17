@@ -1,10 +1,12 @@
 {
   "name": "white-core",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Catálogo web de White Core: AirPods, EarPods, cables y cargadores OEM",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:host": "vite --host",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

@@ -1,228 +1,39 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import LogoMark from "../common/LogoMark";
+import { wa } from "../../data/site";
 
-function Navbar() {
+const links = [
+  { href: "#destacados", label: "Destacados" },
+  { href: "#productos", label: "Productos" },
+  { href: "#garantia", label: "Garantía" },
+  { href: "#entregas", label: "Entregas" },
+];
 
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-
-    const handleScroll = () => {
-
-      setScrolled(window.scrollY > 40);
-
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-
-  }, []);
-
+export default function Navbar() {
   return (
-
-    <motion.header
-
-      initial={{ y: -100 }}
-
-      animate={{ y: 0 }}
-
-      transition={{ duration: .5 }}
-
-      className={`
-
-        fixed
-
-        top-0
-
-        left-0
-
-        right-0
-
-        z-50
-
-        transition-all
-
-        duration-500
-
-        ${
-          scrolled
-
-            ? "bg-[#050816]/80 backdrop-blur-xl py-3 shadow-2xl border-b border-blue-900/30"
-
-            : "bg-transparent py-6"
-
-        }
-
-      `}
-
-    >
-
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-8">
-
-
-        {/* Logo */}
-
-        <a
-
-          href="#inicio"
-
-          className="flex items-center gap-4"
-
-        >
-
-          <img
-
-            src="/logo.png"
-
-            alt="WhiteCore"
-
-            className={`
-
-              object-contain
-
-              transition-all
-
-              duration-500
-
-              ${
-                scrolled
-
-                  ? "w-12 h-12"
-
-                  : "w-16 h-16"
-
-              }
-
-            `}
-
-          />
-
-
-          <div>
-
-            <h2
-
-              className="
-
-              text-white
-
-              font-black
-
-              tracking-widest
-
-              text-2xl
-
-              "
-
-            >
-
-              WhiteCore
-
-            </h2>
-
-
-            <p
-
-              className="
-
-              text-blue-400
-
-              text-sm
-
-              "
-
-            >
-
-              Tecnología Premium
-
-            </p>
-
-
-          </div>
-
-
+    <header className="sticky top-0 z-50 border-b border-ink/10 bg-porcelain/80 backdrop-blur-xl">
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-6">
+        <a href="#inicio" className="flex items-center gap-2.5 font-display text-lg font-extrabold tracking-tight">
+          <LogoMark className="h-8 w-8" />
+          White Core
         </a>
 
-
-
-        {/* Menú */}
-
-        <nav className="hidden md:flex gap-10">
-
-
-          {[
-
-            ["Inicio","#inicio"],
-
-            ["Catálogo","#catalogo"],
-
-            ["Entregas","#entregas"],
-
-            ["Contacto","#contacto"],
-
-          ].map(([name,link])=>(
-
-
-            <a
-
-              key={name}
-
-              href={link}
-
-              className="
-
-                relative
-
-                text-gray-300
-
-                hover:text-white
-
-                font-medium
-
-                transition
-
-                after:absolute
-
-                after:left-0
-
-                after:-bottom-2
-
-                after:h-[2px]
-
-                after:w-0
-
-                after:bg-blue-500
-
-                after:transition-all
-
-                hover:after:w-full
-
-              "
-
-            >
-
-              {name}
-
-
+        <nav className="hidden items-center gap-8 text-[13px] text-graphite md:flex">
+          {links.map((l) => (
+            <a key={l.href} href={l.href} className="transition hover:text-ink">
+              {l.label}
             </a>
-
-
           ))}
-
-
         </nav>
 
-
+        <a
+          href={wa("Hola White Core, quiero información.")}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-full bg-cobalt px-4 py-1.5 text-sm font-medium text-white transition hover:bg-ink"
+        >
+          Comprar
+        </a>
       </div>
-
-
-    </motion.header>
-
-
+    </header>
   );
-
 }
-
-
-export default Navbar;

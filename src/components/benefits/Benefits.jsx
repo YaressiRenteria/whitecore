@@ -1,139 +1,46 @@
-import { motion } from "framer-motion";
-import {
-  ShieldCheck,
-  Truck,
-  MessageCircle,
-  Headphones,
-} from "lucide-react";
+import { MapPin, PackageCheck, ShieldCheck } from "lucide-react";
 
-const benefits = [
-
+const items = [
   {
     icon: ShieldCheck,
     title: "Garantía de 3 días",
-    text: "Todos nuestros productos cuentan con garantía para que compres con tranquilidad.",
+    text: "Cubrimos fallas de fábrica durante los primeros 3 días.",
   },
-
   {
-    icon: Truck,
-    title: "Entrega rápida",
-    text: "Entregas en Ciudad Universitaria UANL y Mitras Poniente.",
+    icon: PackageCheck,
+    title: "Pedido sin vueltas",
+    text: "Eliges el producto, nos escribes por WhatsApp y te lo preparamos.",
   },
-
   {
-    icon: MessageCircle,
-    title: "Atención rápida",
-    text: "Respondemos tus mensajes por WhatsApp lo más pronto posible.",
+    icon: MapPin,
+    title: "Entrega en puntos acordados",
+    text: "Confirmamos contigo el punto y la hora de entrega.",
   },
-
-  {
-    icon: Headphones,
-    title: "Calidad OEM Premium",
-    text: "AirPods, cables y cargadores de excelente calidad.",
-  },
-
 ];
 
-function Benefits() {
-
+export default function Benefits() {
   return (
-
-    <section className="py-28 pb-44 px-6 bg-[#08111F]">
-
-      <div className="max-w-7xl mx-auto">
-
-        <h2 className="text-center text-white text-5xl font-black">
-
-          ¿Por qué comprar en
-
-          <span className="text-blue-500">
-
-            {" "}WhiteCore?
-
-          </span>
-
+    <section id="garantia" className="mx-4 scroll-mt-16 rounded-[2.5rem] bg-ink text-porcelain md:mx-6">
+      <div className="mx-auto max-w-6xl px-6 py-24 text-center">
+        <h2 className="mx-auto max-w-3xl font-display text-4xl font-extrabold leading-[1] tracking-[-0.035em] md:text-6xl">
+          3 días de garantía en fallas de fábrica.
         </h2>
-
-        <p className="text-center text-gray-400 mt-6 text-xl max-w-3xl mx-auto">
-
-          Tecnología OEM de excelente calidad,
-          garantía en todos los productos
-          y atención rápida.
-
+        <p className="mx-auto mt-5 max-w-xl text-porcelain/65">
+          Compras con confianza: si tu producto presenta una falla de fábrica, escríbenos dentro de los primeros 3 días.
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mt-20">
-
-          {benefits.map((item,index)=>{
-
-            const Icon=item.icon;
-
-            return(
-
-              <motion.div
-
-                key={index}
-
-                initial={{
-                  opacity:0,
-                  y:40,
-                }}
-
-                whileInView={{
-                  opacity:1,
-                  y:0,
-                }}
-
-                viewport={{
-                  once:true,
-                }}
-
-                transition={{
-                  delay:index*.15,
-                }}
-
-                whileHover={{
-                  y:-10,
-                  scale:1.02,
-                }}
-
-                className="bg-[#111827] border border-blue-900/30 rounded-3xl p-8 text-center hover:border-blue-500 transition"
-
-              >
-
-                <div className="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center mx-auto mb-6">
-
-                  <Icon color="white" size={36}/>
-
-                </div>
-
-                <h3 className="text-white text-2xl font-bold">
-
-                  {item.title}
-
-                </h3>
-
-                <p className="text-gray-400 leading-8 mt-5">
-
-                  {item.text}
-
-                </p>
-
-              </motion.div>
-
-            )
-
-          })}
-
-        </div>
-
+        <ul className="mt-16 grid gap-12 md:grid-cols-3">
+          {items.map(({ icon: Icon, title, text }) => (
+            <li key={title} className="flex flex-col items-center">
+              <span className="grid h-14 w-14 place-items-center rounded-full bg-amber text-ink">
+                <Icon size={24} />
+              </span>
+              <h3 className="mt-5 font-display text-2xl font-bold tracking-tight">{title}</h3>
+              <p className="mt-2 max-w-xs text-porcelain/65">{text}</p>
+            </li>
+          ))}
+        </ul>
       </div>
-
     </section>
-
-  )
-
+  );
 }
-
-export default Benefits;
-

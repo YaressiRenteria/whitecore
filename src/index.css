@@ -1,13 +1,16 @@
+@import "tailwindcss";
 @import "./styles/colors.css";
 @import "./styles/variables.css";
 @import "./styles/animations.css";
 
-@import "tailwindcss";
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+@theme inline {
+  --font-display: "Bricolage Grotesque", "Poppins", sans-serif;
+  --font-sans: "Poppins", system-ui, sans-serif;
+  --color-porcelain: var(--porcelain);
+  --color-ink: var(--ink);
+  --color-graphite: var(--graphite);
+  --color-cobalt: var(--primary);
+  --color-amber: var(--amber);
 }
 
 html{
@@ -15,20 +18,19 @@ html{
 }
 
 body{
-  background:#050816;
-  color:white;
-  font-family:'Poppins',sans-serif;
+  background:var(--porcelain);
+  color:var(--ink);
+  font-family:var(--font-sans);
+  -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
 
-@keyframes shine {
+::selection{
+  background:var(--primary);
+  color:#fff;
+}
 
-  0%{
-    transform:translateX(-250px) rotate(12deg);
-  }
-
-  100%{
-    transform:translateX(650px) rotate(12deg);
-  }
-
+:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:3px;
 }
