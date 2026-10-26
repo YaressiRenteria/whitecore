@@ -4,13 +4,16 @@
 @import "./styles/animations.css";
 
 @theme inline {
-  --font-display: "Bricolage Grotesque", "Poppins", sans-serif;
-  --font-sans: "Poppins", system-ui, sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-sans);
   --color-porcelain: var(--porcelain);
   --color-ink: var(--ink);
   --color-graphite: var(--graphite);
+  --color-mist: var(--mist);
   --color-cobalt: var(--primary);
+  --color-sky: var(--sky);
   --color-amber: var(--amber);
+  --color-flame: var(--flame);
 }
 
 html{
@@ -18,10 +21,12 @@ html{
 }
 
 body{
-  background:var(--porcelain);
+  background:#fff;
   color:var(--ink);
   font-family:var(--font-sans);
+  font-feature-settings:"cv11","ss01";
   -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
   overflow-x:hidden;
 }
 
@@ -31,6 +36,69 @@ body{
 }
 
 :focus-visible{
-  outline:2px solid var(--primary);
+  outline:2px solid var(--sky);
   outline-offset:3px;
+}
+
+/* Botones estilo píldora */
+@utility btn-primary {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  border-radius:9999px;
+  background:var(--primary);
+  color:#fff;
+  transition:background-color .3s, transform .4s var(--ease);
+  &:hover{ background:var(--primary-hover); }
+  &:active{ transform:scale(.96); }
+}
+
+@utility btn-ghost {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.5rem;
+  border-radius:9999px;
+  border:1px solid currentColor;
+  transition:background-color .3s, color .3s, transform .4s var(--ease);
+  &:active{ transform:scale(.96); }
+}
+
+/* Texto con degradado de la marca (azul del logo → ámbar) */
+@utility text-gradient {
+  background:linear-gradient(100deg,#4fb4f5 0%,#2f6df6 45%,#f5a233 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+@utility text-silver {
+  background:linear-gradient(180deg,#ffffff 10%,#86868b 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+
+/* Borde inferior en zigzag, como un ticket impreso */
+@utility ticket-edge {
+  mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) 50% / 16px 100%;
+}
+
+/* Brillo que sigue al cursor */
+@utility spotlight {
+  position:relative;
+  isolation:isolate;
+  &::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    border-radius:inherit;
+    background:radial-gradient(420px circle at var(--x,50%) var(--y,0%),rgba(41,151,255,.22),transparent 60%);
+    opacity:0;
+    transition:opacity .5s;
+    pointer-events:none;
+  }
+  &:hover::before{ opacity:1; }
 }

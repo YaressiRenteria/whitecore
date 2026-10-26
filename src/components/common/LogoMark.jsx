@@ -10,7 +10,7 @@ export default function LogoMark({ className = "" }) {
         src="/logo.png"
         alt=""
         className="h-full w-full object-cover"
-        style={{ transform: "scale(1.75)", transformOrigin: "50% 38%" }}
+        style={{ transform: "scale(2)", transformOrigin: "50% 38%" }}
       />
     </span>
   );

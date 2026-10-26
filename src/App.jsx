@@ -1,47 +1,88 @@
-import { MotionConfig, motion, useScroll, useSpring } from "framer-motion";
+import { useCallback, useEffect, useState } from "react";
+import { AnimatePresence, MotionConfig } from "framer-motion";
 
+import Intro from "./components/intro/Intro";
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/hero/Hero";
+import Statement from "./components/statement/Statement";
 import FeaturedProducts from "./components/featured/FeaturedProducts";
+import Stats from "./components/stats/Stats";
 import Catalog from "./components/catalog/Catalog";
+import Steps from "./components/steps/Steps";
 import Benefits from "./components/benefits/Benefits";
 import DeliveryPoints from "./components/delivery/DeliveryPoints";
+import FinalCta from "./components/cta/FinalCta";
 import Footer from "./components/footer/Footer";
 import WhatsAppFloat from "./components/floating/WhatsAppFloat";
+import QuickView from "./components/modal/QuickView";
+import CartDrawer from "./components/cart/CartDrawer";
+import FlyToCart from "./components/cart/FlyToCart";
+import { QuickViewContext } from "./context/quickView";
+import { CartContext } from "./context/cart";
+import useCartStore from "./context/useCartStore";
 
-function ScrollProgress() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 140,
-    damping: 28,
-    restDelta: 0.001,
-  });
+const INTRO_KEY = "wc-intro";
 
-  return (
-    <motion.div
-      aria-hidden="true"
-      style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-amber"
-    />
-  );
-}
+// La intro solo se muestra una vez por sesión
+const introSeen = () => {
+  try {
+    return sessionStorage.getItem(INTRO_KEY) === "1";
+  } catch {
+    return false;
+  }
+};
 
 function App() {
+  const [ready, setReady] = useState(introSeen);
+  const [active, setActive] = useState(null);
+  const cart = useCartStore();
+
+  const finishIntro = useCallback(() => {
+    try {
+      sessionStorage.setItem(INTRO_KEY, "1");
+    } catch {
+      // sin almacenamiento disponible: se ignora
+    }
+    setReady(true);
+  }, []);
+
+  const closeQuickView = useCallback(() => setActive(null), []);
+
+  useEffect(() => {
+    if (ready) return;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [ready]);
+
   return (
     <MotionConfig reducedMotion="user">
-      <ScrollProgress />
-      <Navbar />
+      <CartContext value={cart}>
+        <QuickViewContext value={setActive}>
+          <AnimatePresence>{!ready && <Intro key="intro" onDone={finishIntro} />}</AnimatePresence>
 
-      <main>
-        <Hero />
-        <FeaturedProducts />
-        <Catalog />
-        <Benefits />
-        <DeliveryPoints />
-      </main>
+          <Navbar />
 
-      <Footer />
-      <WhatsAppFloat />
+          <main>
+            <Hero ready={ready} />
+            <Statement />
+            <FeaturedProducts />
+            <Stats />
+            <Catalog />
+            <Steps />
+            <Benefits />
+            <DeliveryPoints />
+            <FinalCta />
+          </main>
+
+          <Footer />
+          <WhatsAppFloat />
+          <QuickView product={active} onClose={closeQuickView} />
+          <CartDrawer />
+          <FlyToCart />
+        </QuickViewContext>
+      </CartContext>
     </MotionConfig>
   );
 }

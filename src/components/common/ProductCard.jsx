@@ -1,53 +1,61 @@
 import { motion } from "framer-motion";
-import { ShieldCheck } from "lucide-react";
 import SmartImg from "./SmartImg";
+import AddToCartButton from "../cart/AddToCartButton";
+import { EASE } from "./motion";
 import { trackClick } from "../../data/popularity";
 import { formatPrice, wa } from "../../data/site";
+import { useQuickView } from "../../context/quickView";
 
 export default function ProductCard({ p }) {
+  const open = useQuickView();
+
   return (
     <motion.li
       layout
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ duration: 0.35 }}
-      className="flex flex-col rounded-[1.75rem] bg-porcelain p-3"
+      transition={{ duration: 0.6, ease: EASE }}
+      className="group flex flex-col overflow-hidden rounded-[1.75rem] bg-white shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-[translate,box-shadow] duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-24px_rgba(0,0,0,0.22)]"
     >
-      <div className="overflow-hidden rounded-[1.25rem] bg-white">
-        <SmartImg
-          src={p.image}
-          alt={p.name}
-          loading="lazy"
-          decoding="async"
-          className="aspect-[4/5] w-full object-cover"
-        />
-      </div>
+      <button type="button" onClick={() => open(p)} className="block cursor-pointer text-left">
+        <div className="overflow-hidden bg-porcelain">
+          <SmartImg
+            src={p.image}
+            alt={p.name}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[4/5] w-full object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.06]"
+          />
+        </div>
 
-      <div className="flex flex-1 flex-col px-3 pb-3 pt-5">
-        <p className="text-sm text-graphite">{p.category}</p>
-        <h3 className="mt-1 font-display text-2xl font-bold tracking-tight">{p.name}</h3>
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-graphite">{p.description}</p>
+        <div className="px-6 pt-6">
+          <p className={`text-xs font-semibold ${p.featured ? "text-flame" : "text-graphite"}`}>
+            {p.featured ? "Popular" : p.category}
+          </p>
+          <h3 className="mt-1 text-xl font-semibold tracking-tight">{p.name}</h3>
+          <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-graphite">{p.description}</p>
+        </div>
+      </button>
 
-        <p className="mt-5 font-display text-3xl font-extrabold tracking-tight">
-          {formatPrice(p.price)}
-          <span className="ml-1 text-sm font-medium text-graphite">MXN</span>
+      <div className="mt-auto flex items-center justify-between gap-3 px-6 pb-6 pt-5">
+        <p className="text-lg font-semibold tracking-tight">
+          {formatPrice(p.price)} <span className="text-xs font-normal text-graphite">MXN</span>
         </p>
-
-        <p className="mt-2 flex items-center gap-1.5 text-xs text-graphite">
-          <ShieldCheck size={14} className="shrink-0 text-cobalt" />
-          {p.warranty} de garantía por falla de fábrica
-        </p>
-
-        <div className="mt-auto pt-5">
+        <div className="flex items-center gap-2">
+          <AddToCartButton
+            p={p}
+            label="Agregar"
+            className="px-3.5 py-2 text-sm text-cobalt hover:bg-cobalt hover:text-white"
+          />
           <a
             href={wa(`Hola White Core, me interesa: ${p.name} (${formatPrice(p.price)})`)}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackClick(p.id)}
-            className="block rounded-full bg-cobalt py-3 text-center text-sm font-medium text-white transition hover:bg-ink"
+            className="btn-primary px-4 py-2 text-sm"
           >
-            Pedir por WhatsApp
+            Pedir
           </a>
         </div>
       </div>

@@ -1,5 +1,7 @@
 .spin{ animation:spin 30s linear infinite; }
 .float{ animation:float 7s ease-in-out infinite; }
+.aurora{ animation:aurora 14s ease-in-out infinite alternate; }
+.aurora-slow{ animation:aurora 22s ease-in-out infinite alternate-reverse; }
 
 @keyframes spin{
   to{ transform:rotate(360deg); }
@@ -9,6 +11,10 @@
   50%{ transform:translateY(-12px); }
 }
 
+@keyframes aurora{
+  to{ transform:translate(6%,8%) scale(1.18); }
+}
+
 @keyframes shine{
   0%{ transform:translateX(-250px) rotate(12deg); }
   100%{ transform:translateX(650px) rotate(12deg); }
@@ -16,5 +22,5 @@
 
 @media (prefers-reduced-motion:reduce){
   html{ scroll-behavior:auto; }
-  .spin,.float{ animation:none; }
+  .spin,.float,.aurora,.aurora-slow{ animation:none; }
 }

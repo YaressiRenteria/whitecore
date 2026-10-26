@@ -1,101 +1,52 @@
-import { motion } from "framer-motion";
-import {
-  ShieldCheck,
-  Truck,
-  Headphones,
-  MessageCircle,
-} from "lucide-react";
+import { useEffect, useRef } from "react";
+import { animate, motion, useInView, useMotionValue, useTransform } from "framer-motion";
+import Reveal from "../common/Reveal";
+import { EASE } from "../common/motion";
+import products from "../../data/products";
+import deliveryPoints from "../../data/delivery";
+
+const from = Math.min(...products.map((p) => p.price));
 
 const stats = [
-  {
-    icon: ShieldCheck,
-    value: "3 días",
-    title: "Garantía",
-    description: "Todos nuestros productos cuentan con garantía.",
-  },
-  {
-    icon: Truck,
-    value: "UANL",
-    title: "Entregas",
-    description: "Ciudad Universitaria y Mitras Poniente.",
-  },
-  {
-    icon: Headphones,
-    value: "OEM",
-    title: "Calidad",
-    description: "Excelente calidad en todos nuestros productos.",
-  },
-  {
-    icon: MessageCircle,
-    value: "24/7",
-    title: "WhatsApp",
-    description: "Respondemos lo más rápido posible.",
-  },
+  { to: products.length, label: "productos en la tienda" },
+  { to: 3, suffix: " días", label: "de garantía por fallas de fábrica" },
+  { to: deliveryPoints.length, label: "puntos de entrega en Monterrey" },
+  { to: from, prefix: "$", label: "precio desde, en pesos" },
 ];
 
-function Stats() {
+// Cuenta desde 0 hasta el valor cuando entra en pantalla
+function Counter({ to, prefix = "", suffix = "" }) {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const value = useMotionValue(0);
+  const text = useTransform(value, (v) => `${prefix}${Math.round(v)}${suffix}`);
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(value, to, { duration: 1.8, ease: EASE });
+    return () => controls.stop();
+  }, [inView, value, to]);
+
+  return <motion.span ref={ref}>{text}</motion.span>;
+}
+
+export default function Stats() {
   return (
-    <section className="bg-[#050816] py-20 px-6">
-
-      <div className="max-w-7xl mx-auto">
-
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-
-          {stats.map((item, index) => {
-
-            const Icon = item.icon;
-
-            return (
-
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-                whileHover={{
-                  y: -8,
-                  scale: 1.03,
-                }}
-                className="bg-[#08111F] border border-blue-900/30 rounded-3xl p-8 text-center hover:border-blue-500 transition-all duration-300"
-              >
-
-                <div className="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center mx-auto mb-6">
-
-                  <Icon size={36} color="white" />
-
-                </div>
-
-                <h2 className="text-blue-400 text-5xl font-black">
-
-                  {item.value}
-
-                </h2>
-
-                <h3 className="text-white text-2xl font-bold mt-4">
-
-                  {item.title}
-
-                </h3>
-
-                <p className="text-gray-400 mt-4 leading-7">
-
-                  {item.description}
-
+    <section className="bg-white px-6 pb-28">
+      <div className="mx-auto max-w-6xl border-t border-black/10 pt-20">
+        <ul className="grid grid-cols-2 gap-x-6 gap-y-14 lg:grid-cols-4">
+          {stats.map((s, i) => (
+            <li key={s.label}>
+              <Reveal delay={i * 0.1} y={24}>
+                <p className="text-gradient text-[clamp(3rem,7vw,5rem)] font-semibold leading-none tracking-[-0.04em]">
+                  <Counter {...s} />
                 </p>
-
-              </motion.div>
-
-            );
-
-          })}
-
-        </div>
-
+                <p className="mt-3 max-w-[14rem] text-[15px] text-graphite">{s.label}</p>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
       </div>
-
     </section>
   );
 }
-
-export default Stats;
